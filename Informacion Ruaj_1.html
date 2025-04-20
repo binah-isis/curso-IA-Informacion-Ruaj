@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ruaj Alquimia en Movimiento</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background-color: #f2f6f9;
+      color: #333;
+    }
+
+    header {
+      background-color: #e0e4f1;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      color: #4a4a8a;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    .accordion {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin-bottom: 1rem;
+    }
+
+    .accordion h2 {
+      margin: 0;
+      padding: 1rem;
+      cursor: pointer;
+      background-color: #c5d0eb;
+      border-radius: 10px 10px 0 0;
+    }
+
+    .panel {
+      display: none;
+      padding: 1rem;
+      border-top: 1px solid #ccc;
+    }
+
+    form {
+      background-color: #fff;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      margin: 0.5rem 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #4caf50;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .success-message {
+      margin-top: 1rem;
+      color: green;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Ruaj Alquimia en Movimiento</h1>
+  </header>
+
+  <div class="container">
+    <div class="accordion">
+      <h2 onclick="togglePanel(this)">Iniciación al Tarot</h2>
+      <div class="panel">
+        <p>Curso teórico y práctico para el aprendizaje del tarot desde una perspectiva energética y simbólica. Aprende a interpretar los arcanos y a hacer lecturas intuitivas conectando con tu sabiduría interior.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <h2 onclick="togglePanel(this)">Letras Hebreas</h2>
+      <div class="panel">
+        <p>Curso teórico y práctico que explora el poder espiritual y vibracional de las letras hebreas. Incluye ejercicios de meditación, visualización y conexión con cada letra para activar procesos internos de transformación.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <h2 onclick="togglePanel(this)">Numerología</h2>
+      <div class="panel">
+        <p>Curso teórico y práctico donde aprenderás a calcular e interpretar tu mapa numerológico. Descubre cómo los números influyen en tu vida personal, tus relaciones y tu camino espiritual.</p>
+      </div>
+    </div>
+
+    <div class="accordion">
+      <h2 onclick="togglePanel(this)">Geometría Sagrada</h2>
+      <div class="panel">
+        <p>Curso teórico y práctico que te introduce en los principios de la geometría sagrada, su uso en la sanación energética, mandalas y creación consciente. Incluye prácticas con figuras geométricas y meditaciones guiadas.</p>
+      </div>
+    </div>
+
+    <form id="agenda-form">
+      <h2>Agenda tu sesión o curso</h2>
+      <input type="text" name="nombre" placeholder="Nombre completo" required>
+      <input type="tel" name="telefono" placeholder="Teléfono" required>
+      <input type="email" name="correo" placeholder="Correo electrónico" required>
+      <input type="date" name="fechaNacimiento" placeholder="Fecha de Nacimiento">
+      <input type="text" name="referido" placeholder="Persona recomendada">
+      <input type="tel" name="telefonoContacto" placeholder="Teléfono de contacto">
+      <select name="curso">
+        <option>Iniciación al Tarot</option>
+        <option>Letras Hebreas</option>
+        <option>Numerología</option>
+        <option>Geometría Sagrada</option>
+      </select>
+      <textarea name="comentarios" placeholder="Comentarios adicionales"></textarea>
+      <button type="submit">Enviar</button>
+      <div class="success-message" id="mensaje-exito">👍 Gracias por tu información 🎉 Te contactaremos pronto.</div>
+    </form>
+  </div>
+
+  <script>
+    function togglePanel(element) {
+      const panel = element.nextElementSibling;
+      panel.style.display = panel.style.display === 'block' ? 'none' : 'block';
+    }
+
+    document.getElementById('agenda-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(this);
+
+      fetch('https://script.google.com/macros/s/AKfycbz7bBnpmo3NiiP6clxTUz33V_caHH-iBW0mPezOwwR_t_Sd2PFW_0MornEKeC7hSjYPTw/exec', {
+        method: 'POST',
+        body: formData
+      })
+        .then(response => response.text())
+        .then(data => {
+          const mensaje = document.getElementById('mensaje-exito');
+          mensaje.style.display = 'block';
+          document.getElementById('agenda-form').reset();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setTimeout(() => mensaje.style.display = 'none', 5000);
+        });
+    });
+  </script>
+</body>
+
+</html>
